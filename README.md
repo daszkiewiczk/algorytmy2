@@ -1,2 +1,2 @@
-# algorytmy2
-projekt z wykorzystaniem algorytmów poznanych na przedmiocie
+#Algorytmy II
+Projekt z wykorzystaniem algorytmów poznanych na przedmiocie.
