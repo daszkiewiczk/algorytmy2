@@ -1,0 +1,66 @@
+import numpy
+
+def swap(a, b):
+    temp = a
+    a = b
+    b = temp
+
+
+xt = [-4, -3, 5, 7, 4, 2, -7, -5, 5]
+yt = [-5, -2, 3, 5, -1, -3, -5, -4, 1]
+cht = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+minI = 0  # wyznacza ktory to jest punkt
+miny = yt[0]        # liczy y najnizej
+minx = xt[minI]     # liczy x punktu najbardziej po lewej(opcjonalnie)
+#sortujemy po y
+for i in range(9):
+    for j in range(i, 9):
+        if(yt[i] > yt[j]):
+            yt[i], yt[j] = yt[j], yt[i]
+            xt[i], xt[j] = xt[j], xt[i]
+            cht[i], cht[j] = cht[j], cht[i]
+
+#wyswietlamy posortowane po Y
+for i in range(9):
+    print("Punkt:", chr(cht[i] + 65), "  ", xt[i], yt[i])
+
+#znajdujemy pkt startowy
+for i in range(1, 9):
+    if miny > yt[i]:
+        miny = yt[i]
+        minI = i
+
+for i in range(0, 9):
+    if((miny == yt[i]) and (i != minI)):
+        if(minx > xt[i]):
+            minx = xt[i]
+            minI = i
+
+print("Punkt najnizej po lewej", chr(cht[minI] + 65), minx, miny)  # mamy punkt startowy
+
+# liczenie wyznacnzikow
+pkt1 = 1  # punkt pierwszy po prawej
+pkt2 = 2 # punkt drugi od prawej
+
+#ustawiamy punkt startowy na pierwszym miejscu tabeli
+if(cht[0] !=  cht[minI]):
+    yt[0], yt[minI] = yt[minI], yt[0]
+    xt[0], xt[minI] = xt[minI], xt[0]
+    cht[0], cht[minI] = cht[minI], cht[0]
+
+print("Wyswietlamy z ktorych pkt liczy macierze")
+
+iloscPkt = 7
+while(iloscPkt > 0):
+ M = [[xt[0], yt[0], 1], [xt[pkt1], yt[pkt1], 1], [xt[pkt2], yt[pkt2], 1]];
+ iloscPkt -= 1
+ print(chr(cht[0] + 65) ,"(", xt[0], yt[0],")", chr(cht[pkt1] + 65), "(", xt[pkt1], yt[pkt1],")", chr(cht[pkt2] + 65), "(", xt[pkt2], yt[pkt2],")")
+ if( numpy.linalg.det(M) >= 0):
+     pkt2 += 1
+ else:
+     pkt1 = pkt2
+     pkt2 += 1
+
+print("Punkt:", chr(cht[pkt1] + 65), "  ", xt[pkt1], yt[pkt1])
+#zastąpić punkt który wyszedł punktem podstawowym i działac w pętlis
