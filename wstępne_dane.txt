@@ -1,0 +1,34 @@
+#Mamy c pol p1 ... p_c, na których rośnie x1 ... xc zboża w cyklu.
+#Mamy d karczm k1 ... k_d, które potrzebuja z1 ... zd browaru na cykl.
+#Mamy e browarow b1 ... b_e, które przetwarzają y zboża na browaru na cykl.
+(W kazdej karczmie ten spolczynnik jest taki sam, mozna zapisac jako y1 ... ye, gzdie y1 = ye)
+#Mamy f dróg pomiedzy wierzcholkami na grafie
+ 
+
+Każde skrzyżowanie jest polem, browarem lub karczmą.
+W planie jest zrobienie tego na jedym grafie, gdzie na poczatku pustynmi skrzyzowaniami będzie karczma, a później pole.
+
+Podajemy 4 liczby oddzieone bialym znakiem spacji.......
+
+Wyglad pliku dane.txt
+c d e f  
+
+x1
+x2
+xn
+
+z1
+z2
+zn
+
+y?
+
+Nizej bedziemy mieli f dróg pomiedzy wierzcholkami, które są zapisane w stylu g, h, i, j
+g - jest to pierwszy wierzcholek drogi f
+h - jest to drugi wierzcholek drogi f
+i - jest to maksymalny przeplyw zboża w drodze f
+j - jest to maksymalny przepływ browaru w drodze f
+
+Brakuje ograniczeń g,h,i,j i lepszego zapisu calego pliku
+
+ 
