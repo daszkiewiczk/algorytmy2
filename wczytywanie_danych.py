@@ -15,14 +15,16 @@ first_line = plik.readline()
 n_pol = first_line.split(" ")[0] 			#ile jest pól jęczmienia
 n_jeczmienia = first_line.split(" ")[1] 	#ile średnio jęczmienia wyrasta na jednym poletku
 n_browarow = first_line.split(" ")[2] 		#ile browarów, z których każdy może przetworzyć określoną liczbę jęczmienia
-j2b_przelicznik = first_line.split(" ")[3] 	#w każdym z browarów z tony jęczmienia uzyskuje się jednakową ilość piwa
-n_skrzyzowan = first_line.split(" ")[4]		#ile skrzyzowan
+n_karczm = first_line.split(" ")[3]         #ile jest karczm
+j2b_przelicznik = first_line.split(" ")[4] 	#w każdym z browarów z tony jęczmienia uzyskuje się jednakową ilość piwa
+n_skrzyzowan = first_line.split(" ")[5]		#ile skrzyzowan
 
 n_pol = int(n_pol)
 n_jeczmienia = int(n_jeczmienia)
 n_browarow = int(n_browarow)
 j2b_przelicznik = int(j2b_przelicznik)
 n_skrzyzowan = int(n_skrzyzowan)
+n_karczm = int(n_karczm)
 #p = [0]*n
 #z = [0]*m
 
@@ -85,6 +87,12 @@ G.remove_node('T')
 for browar in nowe_przepustowosci_browarow:
     print(browar,nowe_przepustowosci_browarow[browar])
     G.add_edge("S2",browar,capacity=int(nowe_przepustowosci_browarow[browar]))
+for i in range(1,n_karczm+1):
+    nazwa_karczmy = "k"+str(i)
+    G.add_edge(nazwa_karczmy, "T2")  #zakładamy że przepustowość z karczmy do ujścia jest nieskończona
 #for browar in nowe_przepustowosci_browarow:
 #    G.add_edge("S",)
 drukuj_graf(G)
+
+flow_value, flow_dict = nx.maximum_flow(G, "S2", "T2")
+print(flow_value)
