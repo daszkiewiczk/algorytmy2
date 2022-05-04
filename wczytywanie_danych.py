@@ -10,14 +10,15 @@ def drukuj_graf(G):
     nx.draw_networkx_edge_labels(G, pos)
     plt.show()
 
+
 plik = open("dane.txt","r")
-first_line = plik.readline()
-n_pol = first_line.split(" ")[0] 			#ile jest pól jęczmienia
-n_jeczmienia = first_line.split(" ")[1] 	#ile średnio jęczmienia wyrasta na jednym poletku
-n_browarow = first_line.split(" ")[2] 		#ile browarów, z których każdy może przetworzyć określoną liczbę jęczmienia
-n_karczm = first_line.split(" ")[3]         #ile jest karczm
-j2b_przelicznik = first_line.split(" ")[4] 	#w każdym z browarów z tony jęczmienia uzyskuje się jednakową ilość piwa
-n_skrzyzowan = first_line.split(" ")[5]		#ile skrzyzowan
+pierwsza_linia = plik.readline()
+n_pol = pierwsza_linia.split(" ")[0] 			#ile jest pól jęczmienia
+n_jeczmienia = pierwsza_linia.split(" ")[1] 	#ile średnio jęczmienia wyrasta na jednym poletku
+n_browarow = pierwsza_linia.split(" ")[2] 		#ile browarów, z których każdy może przetworzyć określoną liczbę jęczmienia
+n_karczm = pierwsza_linia.split(" ")[3]         #ile jest karczm
+j2b_przelicznik = pierwsza_linia.split(" ")[4] 	#w każdym z browarów z tony jęczmienia uzyskuje się jednakową ilość piwa
+n_skrzyzowan = pierwsza_linia.split(" ")[5]		#ile skrzyzowan
 
 n_pol = int(n_pol)
 n_jeczmienia = int(n_jeczmienia)
