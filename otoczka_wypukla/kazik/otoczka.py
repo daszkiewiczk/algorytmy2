@@ -4,7 +4,7 @@ def det(a):
     r = a[0][0]*a[1][1]*a[2][2]+a[0][1]*a[1][2]*a[2][0]+a[0][2]*a[1][0]*a[2][1] - (a[0][2]*a[1][1]*a[2][0]+a[0][0]*a[1][2]*a[2][1]+a[0][1]*a[1][0]*a[2][2])
     return r
 def dst(p1,p2):
-    return  sqrt((p2.x - p1.x) ** 2 + (p2.y - p1.y) ** 2)
+    return sqrt((p2.x - p1.x) ** 2 + (p2.y - p1.y) ** 2)
 def usun_nierozwazane(nierozwazane,lista):
     for element in nierozwazane:
         lista.pop(lista.index(element))
