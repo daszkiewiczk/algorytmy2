@@ -4,6 +4,14 @@ import networkx as nx
 import scipy as sp
 
 def drukuj_graf(G):
+    options = {
+        "font_size": 10,
+        "node_size": 500,
+        "node_color": "pink",
+        "edgecolors": "black",
+        "linewidths": 2,
+        "width": 2,
+    }
     pos = nx.kamada_kawai_layout(G)
     nx.draw(G, pos, with_labels=True)
     edge_labels = nx.get_edge_attributes(G, 'capacity')
@@ -23,7 +31,7 @@ n_skrzyzowan = pierwsza_linia.split(" ")[5]		#ile skrzyzowan
 n_pol = int(n_pol)
 n_jeczmienia = int(n_jeczmienia)
 n_browarow = int(n_browarow)
-j2b_przelicznik = int(j2b_przelicznik)
+j2b_przelicznik = float(j2b_przelicznik)
 n_skrzyzowan = int(n_skrzyzowan)
 n_karczm = int(n_karczm)
 #p = [0]*n
@@ -60,14 +68,6 @@ for i in range(n_skrzyzowan):
     # G[(i,j)] == (int)(linia.split(" ")[2])
 
 #rysowanie reprezentacji graficznej grafu
-options = {
-    "font_size": 10,
-    "node_size": 500,
-    "node_color": "pink",
-    "edgecolors": "black",
-    "linewidths": 2,
-    "width": 2,
-}
 #pos = nx.spring_layout(G, seed=3068)  # Seed layout for reproducibility
 #pos = nx.nx_agraph.graphviz_layout(G)
 drukuj_graf(G)
@@ -77,17 +77,17 @@ flow_value, flow_dict = nx.maximum_flow(G, "S", "T")
 for src,src_info in flow_dict.items():
     for key in src_info:
          if(key == 'T'):
-             print(src, end=" ")
-             print(key, end=" ")
-             print(src_info[key])
+             #print(src, end=" ")
+             #print(key, end=" ")
+             #print(src_info[key])
              nowe_przepustowosci_browarow[src] = src_info[key]
 print(flow_dict)
-print(flow_value)
+print("wartosc przeplywu z pol do browarow " + str(flow_value))
 G.remove_node('S')
 G.remove_node('T')
 for browar in nowe_przepustowosci_browarow:
-    print(browar,nowe_przepustowosci_browarow[browar])
-    G.add_edge("S2",browar,capacity=int(nowe_przepustowosci_browarow[browar]))
+    #print(browar,nowe_przepustowosci_browarow[browar])
+    G.add_edge("S2",browar,capacity=int(nowe_przepustowosci_browarow[browar]) * j2b_przelicznik)    #z okreslonej ilosci zboza wytwarzamy okreslona ilosc browaru wiec trzeba przelczyc
 for i in range(1,n_karczm+1):
     nazwa_karczmy = "k"+str(i)
     G.add_edge(nazwa_karczmy, "T2")  #zakładamy że przepustowość z karczmy do ujścia jest nieskończona
@@ -96,4 +96,4 @@ for i in range(1,n_karczm+1):
 drukuj_graf(G)
 
 flow_value, flow_dict = nx.maximum_flow(G, "S2", "T2")
-print(flow_value)
+print("wartosc przeplywu z browarow do karczm "+str(flow_value))
