@@ -1,4 +1,5 @@
 from math import sqrt
+from punkt import Punkt
 
 def det(a):
     r = a[0][0]*a[1][1]*a[2][2]+a[0][1]*a[1][2]*a[2][0]+a[0][2]*a[1][0]*a[2][1] - (a[0][2]*a[1][1]*a[2][0]+a[0][0]*a[1][2]*a[2][1]+a[0][1]*a[1][0]*a[2][2])
@@ -80,20 +81,13 @@ def znajdz_otoczke():
         indeksy_pktow_otoczki.append(punkty.index(nwk))
         rozwazane_punkty = punkty.copy()
 
-    print("indeksy punktów należących do otoczki w zadanym zbiorze punktów: ", end="")
-    print(indeksy_pktow_otoczki)
-    print("punkty należące do otoczki w zadanym zbiorze punktów: ", end="")
-    print(*otoczka, sep=", ")
+    #print("indeksy punktów należących do otoczki w zadanym zbiorze punktów: ", end="")
+    #print(indeksy_pktow_otoczki)
+    #print("punkty należące do otoczki w zadanym zbiorze punktów: ", end="")
+    #print(*otoczka, sep=", ")
     return otoczka
 
-class Punkt:
-    x = 0
-    y = 0
-    def __init__(self, x, y):
-        self.x=x
-        self.y=y
-    def __str__(self):
-        return "("+str(self.x) + ", "+str(self.y)+")"
+
         
 if __name__ == '__main__':
-        znajdz_otoczke()
+        o = znajdz_otoczke()

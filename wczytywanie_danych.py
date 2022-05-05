@@ -34,11 +34,8 @@ n_browarow = int(n_browarow)
 j2b_przelicznik = float(j2b_przelicznik)
 n_skrzyzowan = int(n_skrzyzowan)
 n_karczm = int(n_karczm)
-#p = [0]*n
-#z = [0]*m
 
 G = nx.DiGraph()
-#G = np.zeros((n+m+k,n+m+k))
 
 nowe_przepustowosci_browarow = dict()
 for i in range(1,n_pol+1):
@@ -47,32 +44,11 @@ for i in range(1,n_browarow+1):
     nazwa_browaru = "b"+str(i)
     G.add_edge(nazwa_browaru, "T", capacity=int(plik.readline()))
     nowe_przepustowosci_browarow[nazwa_browaru] = 0
-#print(G.out_edges)
 for i in range(n_skrzyzowan):
     linia = plik.readline()
-    #print(linia.split(" ")[0])
     G.add_edge(linia.split(" ")[0], linia.split(" ")[1], capacity=(int)(linia.split(" ")[2]))
-    # if(linia[0] == "b"):
-    # 	i = linia.split(" ")[1::]
-    # elif(linia[0] == "s"):
-    # 	i = int(linia.split(" ")[1::])+n
-    # elif(linia[0] == "d"):
-    # 	i = int(linia.split(" ")[1::])+n+k
-    #
-    # if(linia.split(" ")[1][0] == "b"):
-    # 	j = int(linia.split(" ")[1][1::])
-    # elif(linia.split(" ")[1][0] == "s"):
-    # 	j = int(linia.split(" ")[1][1::])+n
-    # elif(linia.split(" ")[1][0] == "d"):
-    # 	j = int(linia.split(" ")[1][1::])+n+k
-    # G[(i,j)] == (int)(linia.split(" ")[2])
-
-#rysowanie reprezentacji graficznej grafu
-#pos = nx.spring_layout(G, seed=3068)  # Seed layout for reproducibility
-#pos = nx.nx_agraph.graphviz_layout(G)
 drukuj_graf(G)
 flow_value, flow_dict = nx.maximum_flow(G, "S", "T")
-#print(flow_value)
 
 for src,src_info in flow_dict.items():
     for key in src_info:
@@ -86,13 +62,11 @@ print("wartosc przeplywu z pol do browarow " + str(flow_value))
 G.remove_node('S')
 G.remove_node('T')
 for browar in nowe_przepustowosci_browarow:
-    #print(browar,nowe_przepustowosci_browarow[browar])
     G.add_edge("S2",browar,capacity=int(nowe_przepustowosci_browarow[browar]) * j2b_przelicznik)    #z okreslonej ilosci zboza wytwarzamy okreslona ilosc browaru wiec trzeba przelczyc
 for i in range(1,n_karczm+1):
     nazwa_karczmy = "k"+str(i)
     G.add_edge(nazwa_karczmy, "T2")  #zakładamy że przepustowość z karczmy do ujścia jest nieskończona
 #for browar in nowe_przepustowosci_browarow:
-#    G.add_edge("S",)
 drukuj_graf(G)
 
 flow_value, flow_dict = nx.maximum_flow(G, "S2", "T2")
