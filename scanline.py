@@ -31,7 +31,7 @@ def czy_przynalezy(pkt,o):
 
 
 if __name__ == '__main__':
-    pkty = [Punkt(-100,21),Punkt(-19,21), Punkt(11,-78),Punkt(6,-64),Punkt(-21,-80),Punkt(-86,15),Punkt(-2,86),Punkt(58,16),Punkt(92,-59),Punkt(-99,-31),Punkt(18,-66)]
+    pkty = [Punkt(-100,21), Punkt(-19,21), Punkt(11,-78),Punkt(6,-64),Punkt(-21,-80),Punkt(-86,15),Punkt(-2,86),Punkt(58,16),Punkt(92,-59),Punkt(-99,-31),Punkt(18,-66)]
     o = otoczka.znajdz_otoczke()
     for pkt in pkty:
         print(czy_przynalezy(pkt,o))

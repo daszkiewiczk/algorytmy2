@@ -2,6 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import networkx as nx
 import scipy as sp
+from scanline import czy_przynalezy
+from punkt import Punkt
+from otoczka import znajdz_otoczke
 
 def drukuj_graf(G):
     options = {
@@ -38,8 +41,31 @@ n_karczm = int(n_karczm)
 G = nx.DiGraph()
 G2 = nx.DiGraph()
 nowe_przepustowosci_browarow = dict()
+cwiartki = list()
+pdo = [[Punkt(-100,-100), Punkt(-100,0), Punkt(0,0), Punkt(0,-100)], [Punkt(0,0), Punkt(0,100), Punkt(100,0), Punkt(100,100)]]
+pdo.append([Punkt(0,0), Punkt(0,-100), Punkt(100,-100), Punkt(100,0)])
+pdo.append([Punkt(-100,100), Punkt(-100,0), Punkt(0,0), Punkt(0,100)])
+otoczki = list()
+for i in range(0,4):
+    otoczki.append(znajdz_otoczke(pdo[i]))
+
+for i in range(0,4):
+    cwiartki.append(float(plik.readline()))
+#for i in range(1,n_pol+1):
+#    G.add_edge("S", "p"+str(i), capacity=n_jeczmienia)
 for i in range(1,n_pol+1):
-    G.add_edge("S", "p"+str(i), capacity=n_jeczmienia)
+    linia = plik.readline()
+    x = float(linia.split(" ")[0])
+    y = float(linia.split(" ")[1])
+    p = Punkt(x,y)
+    if czy_przynalezy(p, otoczki[0]):
+        G.add_edge("S", "p"+str(i), capacity=cwiartki[0])
+    if czy_przynalezy(p, otoczki[1]):
+        G.add_edge("S", "p"+str(i), capacity=cwiartki[1])
+    if czy_przynalezy(p, otoczki[2]):
+        G.add_edge("S", "p"+str(i), capacity=cwiartki[2])
+    if czy_przynalezy(p, otoczki[3]):
+        G.add_edge("S", "p"+str(i), capacity=cwiartki[3])
 for i in range(1,n_browarow+1):
     nazwa_browaru = "b"+str(i)
     G.add_edge(nazwa_browaru, "T", capacity=float(plik.readline()))
