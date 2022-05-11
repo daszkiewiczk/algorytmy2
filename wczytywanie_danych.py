@@ -20,7 +20,28 @@ def drukuj_graf(G):
     edge_labels = nx.get_edge_attributes(G, 'capacity')
     nx.draw_networkx_edge_labels(G, pos)
     plt.show()
-
+def znajdz_otoczki_cwiartek():
+    #pdo - punkty definiujace otoczki
+    #pdo = [[Punkt(-100, -100), Punkt(-100, 0), Punkt(0, 0), Punkt(0, -100)],
+    #       [Punkt(0, 0), Punkt(0, 100), Punkt(100, 0), Punkt(100, 100)]]
+    #pdo.append([Punkt(0, 0), Punkt(0, -100), Punkt(100, -100), Punkt(100, 0)])
+    #pdo.append([Punkt(-100, 100), Punkt(-100, 0), Punkt(0, 0), Punkt(0, 100)])
+    pdo_file = open("pdo.txt","r")
+    pdo = list()
+    n = [int(el) for el in pdo_file.readline().split(" ")]
+    print(n)
+    for i in range(4):
+        pdo_tmp = list()
+        for j in range(n[i]):
+            pkt_lst = [float(el) for el in pdo_file.readline().split(" ")]
+            #pkt_lst = pdo_file.readline().split(" ")
+            #print(pkt_lst)
+            pdo_tmp.append(Punkt(pkt_lst[0], pkt_lst[1]))
+        pdo.append(pdo_tmp)
+    otoczki = list()
+    for i in range(0, 4):
+        otoczki.append(znajdz_otoczke(pdo[i]))
+    return otoczki
 
 if __name__ == '__main__':
     plik = open("dane.txt","r")
@@ -43,12 +64,7 @@ if __name__ == '__main__':
     G2 = nx.DiGraph()
     nowe_przepustowosci_browarow = dict()
     cwiartki = list()
-    pdo = [[Punkt(-100,-100), Punkt(-100,0), Punkt(0,0), Punkt(0,-100)], [Punkt(0,0), Punkt(0,100), Punkt(100,0), Punkt(100,100)]]
-    pdo.append([Punkt(0,0), Punkt(0,-100), Punkt(100,-100), Punkt(100,0)])
-    pdo.append([Punkt(-100,100), Punkt(-100,0), Punkt(0,0), Punkt(0,100)])
-    otoczki = list()
-    for i in range(0,4):
-        otoczki.append(znajdz_otoczke(pdo[i]))
+    otoczki = znajdz_otoczki_cwiartek()
 
     for i in range(0,4):
         cwiartki.append(float(plik.readline()))
@@ -86,7 +102,7 @@ if __name__ == '__main__':
                  #print(key, end=" ")
                  #print(src_info[key])
                  nowe_przepustowosci_browarow[src] = src_info[key]
-    print(flow_dict)
+    #print(flow_dict)
     print("wartosc przeplywu z pol do browarow " + str(flow_value))
     #G.remove_node('S')
     #G.remove_node('T')
