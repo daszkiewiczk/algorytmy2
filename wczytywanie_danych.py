@@ -17,7 +17,7 @@ def drukuj_graf(G):
     }
     pos = nx.kamada_kawai_layout(G)
     nx.draw(G, pos, with_labels=True)
-    edge_labels = nx.get_edge_attributes(G, 'capacity')
+    #edge_labels = nx.get_edge_attributes(G, 'capacity')
     nx.draw_networkx_edge_labels(G, pos)
     plt.show()
 
@@ -44,11 +44,11 @@ if __name__ == '__main__':
     plik = open("dane.txt","r")
     n_string = plik.readline().split(" ")
     n_pol = int(n_string[0]) 			    #ile jest pól jęczmienia
-    n_jeczmienia = float(n_string[1]) 	    #ile średnio jęczmienia wyrasta na jednym poletku
-    n_browarow = int(n_string[2])		    #ile browarów, z których każdy może przetworzyć określoną liczbę jęczmienia
-    n_karczm = int(n_string[3])             #ile jest karczm
-    j2b_przelicznik = float(n_string[4]) 	#w każdym z browarów z tony jęczmienia uzyskuje się jednakową ilość piwa
-    n_skrzyzowan = int(n_string[5])		    #ile skrzyzowan
+    #n_jeczmienia = float(n_string[1]) 	    #ile średnio jęczmienia wyrasta na jednym poletku
+    n_browarow = int(n_string[1])		    #ile browarów, z których każdy może przetworzyć określoną liczbę jęczmienia
+    n_karczm = int(n_string[2])             #ile jest karczm
+    j2b_przelicznik = float(n_string[3]) 	#w każdym z browarów z tony jęczmienia uzyskuje się jednakową ilość piwa
+    n_skrzyzowan = int(n_string[4])		    #ile skrzyzowan
 
     przepustowosc_cwiartki = list()
     otoczki = znajdz_otoczki_cwiartek()
@@ -57,7 +57,7 @@ if __name__ == '__main__':
     nowe_przepustowosci_browarow = dict()
     G2 = nx.DiGraph()
 
-    for i in range(0,4):
+    for i in range(0,5):
         przepustowosc_cwiartki.append(float(plik.readline()))
     #ponizej wersja dodawania przepustowosci bez rozroznienia na cwiartki
     #for i in range(1,n_pol+1):
@@ -69,13 +69,15 @@ if __name__ == '__main__':
         p = Punkt(x,y)
         if czy_przynalezy(p, otoczki[0]):
             G.add_edge("S", "p"+str(i), capacity=przepustowosc_cwiartki[0])
-        if czy_przynalezy(p, otoczki[1]):
+        elif czy_przynalezy(p, otoczki[1]):
             G.add_edge("S", "p"+str(i), capacity=przepustowosc_cwiartki[1])
-        if czy_przynalezy(p, otoczki[2]):
+        elif czy_przynalezy(p, otoczki[2]):
             G.add_edge("S", "p"+str(i), capacity=przepustowosc_cwiartki[2])
-        if czy_przynalezy(p, otoczki[3]):
+        elif czy_przynalezy(p, otoczki[3]):
             G.add_edge("S", "p"+str(i), capacity=przepustowosc_cwiartki[3])
-    #print(G.edges("S","capacity"))
+        else:
+            G.add_edge("S", "p"+str(i), capacity=przepustowosc_cwiartki[4])
+    print(G.edges("S","capacity"))
     for i in range(1,n_browarow+1):
         nazwa_browaru = "b"+str(i)
         G.add_edge(nazwa_browaru, "T", capacity=float(plik.readline()))
@@ -100,7 +102,7 @@ if __name__ == '__main__':
     #print(flow_dict)
     mincostFlowValue = sum((mincostFlowDict[u]["T"] for u in G.predecessors("T"))) - sum((mincostFlowDict["T"][v] for v in G.successors("T")))
     print("wartosc przeplywu z pol do browarow " + str(mincostFlowValue))
-    print("koszt naprawdy drog po dostarczeniu zboza do browarow: "+ str(mincost))
+    print("koszt naprawy drog po dostarczeniu zboza do browarow: "+ str(mincost))
     #ponizsze niepotrzebne ze wzgledu na utworzenie dwoch grafow
     #G.remove_node('S')
     #G.remove_node('T')
@@ -116,4 +118,4 @@ if __name__ == '__main__':
     mincost2 = nx.cost_of_flow(G2, mincostFlowDict)
     print("wartosc przeplywu z browarow do karczm "+str(mincostFlowValue))
     print("koszt naprawy drog zeby dostarczyc browar do karczm "+ str(mincost2))
-    print("laczny koszt naprawdy drog: "+str(mincost+mincost2))
+    print("laczny koszt naprawy drog: "+str(mincost+mincost2))
