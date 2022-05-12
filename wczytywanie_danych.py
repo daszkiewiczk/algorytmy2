@@ -109,5 +109,6 @@ if __name__ == '__main__':
         G2.add_edge(nazwa_karczmy, "T2")  #zakładamy że przepustowość z karczmy do ujścia jest nieskończona
     drukuj_graf(G2)
 
-    flow_value, flow_dict = nx.max_flow_min_cost(G2, "S2", "T2")
-    print("wartosc przeplywu z browarow do karczm "+str(flow_value))
+    mincostFlowDict = nx.max_flow_min_cost(G2, "S2", "T2")
+    mincostFlowValue = sum((mincostFlowDict[u]["T2"] for u in G2.predecessors("T2"))) - sum((mincostFlowDict["T2"][v] for v in G2.successors("T2")))
+    print("wartosc przeplywu z browarow do karczm "+str(mincostFlowValue))
