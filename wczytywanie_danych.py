@@ -81,15 +81,15 @@ if __name__ == '__main__':
         G.add_edge(nazwa_browaru, "T", capacity=float(plik.readline()))
         nowe_przepustowosci_browarow[nazwa_browaru] = 0
     for i in range(n_skrzyzowan):
-        linia = plik.readline()
-        G.add_edge(linia.split(" ")[0], linia.split(" ")[1], capacity=(float)(linia.split(" ")[2]))
-        G2.add_edge(linia.split(" ")[0], linia.split(" ")[1], capacity=(float)(linia.split(" ")[3]))
+        linia = plik.readline().split(" ")
+        G.add_edge(linia[0], linia[1], capacity=(float)(linia[2]), weight = int(linia[4]))
+        G2.add_edge(linia[0], linia[1], capacity=(float)(linia[3]), weight = int(linia[4]))
 
     drukuj_graf(G)
 
-    flow_value, flow_dict = nx.maximum_flow(G, "S", "T")
+    mincostFlowDict = nx.max_flow_min_cost(G, "S", "T")
 
-    for src,src_info in flow_dict.items():
+    for src,src_info in mincostFlowDict.items():
         for key in src_info:
              if(key == 'T'):
                  #print(src, end=" ")
@@ -97,7 +97,8 @@ if __name__ == '__main__':
                  #print(src_info[key])
                  nowe_przepustowosci_browarow[src] = src_info[key]
     #print(flow_dict)
-    print("wartosc przeplywu z pol do browarow " + str(flow_value))
+    mincostFlowValue = sum((mincostFlowDict[u]["T"] for u in G.predecessors("T"))) - sum((mincostFlowDict["T"][v] for v in G.successors("T")))
+    print("wartosc przeplywu z pol do browarow " + str(mincostFlowValue))
     #ponizsze niepotrzebne ze wzgledu na utworzenie dwoch grafow
     #G.remove_node('S')
     #G.remove_node('T')
@@ -108,5 +109,5 @@ if __name__ == '__main__':
         G2.add_edge(nazwa_karczmy, "T2")  #zakładamy że przepustowość z karczmy do ujścia jest nieskończona
     drukuj_graf(G2)
 
-    flow_value, flow_dict = nx.maximum_flow(G2, "S2", "T2")
+    flow_value, flow_dict = nx.max_flow_min_cost(G2, "S2", "T2")
     print("wartosc przeplywu z browarow do karczm "+str(flow_value))
