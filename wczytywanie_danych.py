@@ -88,6 +88,7 @@ if __name__ == '__main__':
     drukuj_graf(G)
 
     mincostFlowDict = nx.max_flow_min_cost(G, "S", "T")
+    mincost = nx.cost_of_flow(G, mincostFlowDict)
 
     for src,src_info in mincostFlowDict.items():
         for key in src_info:
@@ -99,6 +100,7 @@ if __name__ == '__main__':
     #print(flow_dict)
     mincostFlowValue = sum((mincostFlowDict[u]["T"] for u in G.predecessors("T"))) - sum((mincostFlowDict["T"][v] for v in G.successors("T")))
     print("wartosc przeplywu z pol do browarow " + str(mincostFlowValue))
+    print("koszt naprawdy drog: "+ str(mincost))
     #ponizsze niepotrzebne ze wzgledu na utworzenie dwoch grafow
     #G.remove_node('S')
     #G.remove_node('T')
