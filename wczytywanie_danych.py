@@ -44,7 +44,6 @@ if __name__ == '__main__':
     plik = open("dane.txt","r")
     n_string = plik.readline().split(" ")
     n_pol = int(n_string[0]) 			    #ile jest pól jęczmienia
-    #n_jeczmienia = float(n_string[1]) 	    #ile średnio jęczmienia wyrasta na jednym poletku
     n_browarow = int(n_string[1])		    #ile browarów, z których każdy może przetworzyć określoną liczbę jęczmienia
     n_karczm = int(n_string[2])             #ile jest karczm
     j2b_przelicznik = float(n_string[3]) 	#w każdym z browarów z tony jęczmienia uzyskuje się jednakową ilość piwa
