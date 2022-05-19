@@ -75,7 +75,7 @@ if __name__ == '__main__':
             G.add_edge("S", "p"+str(i), capacity=przepustowosc_cwiartki[2])
         elif czy_przynalezy(p, otoczki[3]):
             G.add_edge("S", "p"+str(i), capacity=przepustowosc_cwiartki[3])
-        else:
+        else:   #brak przynaleznosci do zadnej ze cwiartek
             G.add_edge("S", "p"+str(i), capacity=przepustowosc_cwiartki[4])
     print(G.edges("S","capacity"))
     for i in range(1,n_browarow+1):
