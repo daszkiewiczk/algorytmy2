@@ -5,7 +5,7 @@ import scipy as sp
 from scanline import czy_przynalezy
 from punkt import Punkt
 from otoczka import znajdz_otoczke
-#test commit
+#test
 def drukuj_graf(G):
     options = {
         "font_size": 10,
