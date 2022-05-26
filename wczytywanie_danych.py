@@ -5,7 +5,7 @@ import scipy as sp
 from scanline import czy_przynalezy
 from punkt import Punkt
 from otoczka import znajdz_otoczke
-
+#test commit
 def drukuj_graf(G):
     options = {
         "font_size": 10,
@@ -76,7 +76,7 @@ if __name__ == '__main__':
             G.add_edge("S", "p"+str(i), capacity=przepustowosc_cwiartki[3])
         else:   #brak przynaleznosci do zadnej ze cwiartek
             G.add_edge("S", "p"+str(i), capacity=przepustowosc_cwiartki[4])
-    print(G.edges("S","capacity"))
+    #print(G.edges("S","capacity"))
     for i in range(1,n_browarow+1):
         nazwa_browaru = "b"+str(i)
         G.add_edge(nazwa_browaru, "T", capacity=float(plik.readline()))
