@@ -85,7 +85,7 @@ if __name__ == '__main__':
         nazwa_browaru = "b" + str(i)
         G.add_edge(nazwa_browaru, "T", capacity=float(plik.readline()))
         nowe_przepustowosci_browarow[nazwa_browaru] = 0
-    for i in range(suma):
+    for i in range(suma*2):
         linia = plik.readline().split(" ")
         G.add_edge(linia[0], linia[1], capacity=float(linia[2]), weight=int(linia[4]))
         G2.add_edge(linia[0], linia[1], capacity=float(linia[3]), weight=int(linia[4]))
