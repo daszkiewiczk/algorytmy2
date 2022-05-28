@@ -1,5 +1,6 @@
-# Generator losowych danych dla testow
+# Generator losowych danych dla Królestwa z podziałem na strefy
 
+# Dokąd może prowadzić droga z danego miejsca:
 # pole [p] ->           !p      b       !k      d
 # browar [b] ->         !p      !b      k       d
 # karczma [k] ->        !p      !b      !k      !d
@@ -14,7 +15,7 @@ d: int = random.randint(0, 20)
 
 with open('dane_1.txt', 'w') as f:
     # w pierwszej linii sa kolejno: liczba pol [p], liczba browarow [b], liczba karczm [k],
-    # liczba skrzyzowan [d], przelicznik produkcji z browaru z jeczmienia [0.5]
+    # liczba skrzyzowan [d], przelicznik produkcji browaru z jeczmienia [0.5]
     f.write(str(p) + ' ' + str(b) + ' ' + str(k) + ' ' + str(d) + ' 0.5')
 
     # w 5 kolejnych wierszach losowane sa przepustowosci cwiartek
@@ -28,10 +29,6 @@ with open('dane_1.txt', 'w') as f:
     # w b kolejnych wierszach losowane sa przepustowosci browarow
     for i in range(b):
         f.write('\n' + str(random.randint(1, 10)))
-
-    # w k kolejnych wierszach losowane sa przepustowosci karczm
-#    for i in range(k):
-#        f.write('\n' + str(random.randint(1, 10)))
 
     # generowanie miejsca docelowego dla kazdego pola
     for i in range(p):
