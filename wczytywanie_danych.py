@@ -9,7 +9,7 @@ from networkx.drawing.nx_agraph import graphviz_layout
 
 def drukuj_graf(G):
     options = {
-        "font_size": 10,
+        "font_size": 7,
         "node_size": 500,
         "node_color": "pink",
         "edgecolors": "black",
@@ -44,7 +44,7 @@ def znajdz_otoczki_cwiartek():
 
 
 if __name__ == '__main__':
-    plik = open("dane_2.txt", "r")
+    plik = open("PoprawneDane\dane_0.txt", "r")
     n_string = plik.readline().split(" ")
     n_pol = int(n_string[0])  # ile jest pól jęczmienia
     n_browarow = int(n_string[1])  # ile browarów, z których każdy może przetworzyć określoną liczbę jęczmienia
