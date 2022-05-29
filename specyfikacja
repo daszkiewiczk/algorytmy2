@@ -1,0 +1,26 @@
+Specyfikacja programu rozwiązującego problem przewozu surowców w Królestwie
+
+Mamy p pol 	  po1 ... po_p, na którym  rośnie u1 ... up zboża w cyklu
+Mamy b browarow   br1 ... br_b, które przetwarzają v1 ...vb zbożna na browar w cyklu
+Mamy k karczm 	  ka1 ... ka_k, które potrzebują w1 ... wk browaru na cykl
+Mamy d skrzyzowan sk1 ... sk_d, na których nie ma pól, browarow ani karczmy
+a to przelicznik produkcji jęczmienia na browar
+
+Plik z danymi musi być zapisany w taki sposób:
+Na początku podajemy 5 liczb naturalnych p, b, k, d, a oddzielonych białym znakiem,
+następnie 5 liczb każda w osobnej linijce oznaczające przepustowość każdej z 4 ćwiartek, gdzie piąta liczba oznacza przepustowość dla pola które znajduje się poza ćwiartkami.
+
+Niżej znajduje się p wierszy, gdzie są podane współrzędne pól[x y], składające się z dwóch liczb całkowitych oddzielonch białym znakiem.
+
+Następnie podajemy b wierszy zapotrzebowania dla br1 ... br_b browarów
+
+Na koniec podajemy 2 * (p + b + k + d) wierszy które określają drogi w grafie z ich przepustowością i kosztem naprawy w stylu:
+q r s t z, gdzie:
+q jest postaci po_e, br_f, ka_g, sk_h, ([1 <= e <= p] i [1 <= f <= b] i [1 <= g <= k] i [1 <= h <= d]),
+r jest postaci po_l, br_m, ka_n, sk_o, ([1 <= l <= p] i [1 <= m <= b] i [1 <= n <= k] i [1 <= o <= d] i jest różne od q),
+s jest to maksymalna możliwa przepustowość dla zboża
+t jest to maksymlana możliwa przepustowość dla piwa
+z jest to koszt naprawy drogi
+
+W wyniku działania programu wyświetla się graf, a także w konsoli wyświetlają się takie informacje jak przepływ pomiędzy punktami w grafie,
+wartość przepływów z pól do browarów i z browarów do karczm czy koszt naprawy wszystkich dróg w królestwie
