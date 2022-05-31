@@ -9,13 +9,13 @@
 #Gdzie niedopuszczamy do sytuacji, gdzie droga prowadzi do tego samego miejsca np p3 -> p3
 import random
 
-for j in range(1,11):
+for j in range(1,6):
     p: int = random.randint(1, 20)
     b: int = random.randint(1, 20)
     k: int = random.randint(1, 20)
     d: int = random.randint(1, 20)
 
-    with open('dane_'+str(j)+'.txt', 'w') as f:
+    with open('DaneTestowe/dane_'+str(j)+'.txt', 'w') as f:
         # w pierwszej linii sa kolejno: liczba pol [p], liczba browarow [b], liczba karczm [k],
         # liczba skrzyzowan [d], przelicznik produkcji browaru z jeczmienia [0.5]
         f.write(str(p) + ' ' + str(b) + ' ' + str(k) + ' ' + str(d) + ' 0.5')
