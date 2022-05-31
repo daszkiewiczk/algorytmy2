@@ -1,6 +1,6 @@
 import otoczka
 from punkt import Punkt
-
+#Sprawdza czy odcinek zadany przez pare punktów na płaszczyznie przecina prostą poziomą y
 def przecina(p1,p2,y):
     if (p1.y > y and p2.y < y) or (p1.y < y and p2.y > y):
         return True
@@ -8,11 +8,13 @@ def przecina(p1,p2,y):
         return True
     else:
         return False
+#Zwraca współrzędną x punktu przecięcia prostej poziomej y z odcinkiem (p1, p2)
 def x_przeciecia(p1,p2,y):
     if p1.y == p2.y:    #prosta rownolegla do ox
         return 0
     x = p1.x + (y - p1.y) * (p2.x - p1.x) / (p2.y - p1.y)
     return x
+#Sprawdza czy punkt na płaszczyznie pkt leży wewnątrz zadanej otoczki wypukłej o
 def czy_przynalezy(pkt,o):
     if pkt in o:
         return True
