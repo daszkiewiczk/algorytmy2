@@ -1,9 +1,11 @@
 from math import sqrt
 from punkt import Punkt
 
+#Oblicza wyznacznik macierzy 3x3
 def det(a):
     r = a[0][0]*a[1][1]*a[2][2]+a[0][1]*a[1][2]*a[2][0]+a[0][2]*a[1][0]*a[2][1] - (a[0][2]*a[1][1]*a[2][0]+a[0][0]*a[1][2]*a[2][1]+a[0][1]*a[1][0]*a[2][2])
     return r
+#Oblicza odległość między dwoma punktami na płaszczyznie
 def dst(p1,p2):
     return sqrt((p2.x - p1.x) ** 2 + (p2.y - p1.y) ** 2)
 def usun_nierozwazane(nierozwazane,lista):
@@ -18,6 +20,7 @@ def znajdz_otoczke(lista_pktow):
     ymax = float('-inf')
     xmin = float('inf')
     xmax = float('-inf')
+    #Wczytywanie punktów, ustalenie punktu najbardziej na dół i na lewo w układzie współrzędnych i punktu najbardziej w górę i na prawo
     for i in range(n):
         #linia = plik.readline()
         #x = int(linia.split(" ")[0])
@@ -46,6 +49,7 @@ def znajdz_otoczke(lista_pktow):
     rozwazane_punkty = punkty.copy()
     rozwazane_punkty.pop(imin)
     indeksy_pktow_otoczki = [imin]
+    #Szukamy punktów o najmniejszej współrzędnej kątowej (nwk) względem ostatnio dodanego do otoczki i dodajemy go do otoczki
     while nwk != punkty[imax]:
         while len(rozwazane_punkty) > 1:
             A = [[nwk.x, nwk.y, 1], [rozwazane_punkty[0].x, rozwazane_punkty[0].y, 1],
